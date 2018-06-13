@@ -58,6 +58,12 @@
                                     <a href="{{ route('lk') }}">Личный кабинет</a>
                                 </li>
 
+                                @role('admin')
+                                <li>
+                                    <a href="{{ route('administration') }}">Администрование</a>
+                                </li>
+                                @endrole
+
                                 <li>
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
