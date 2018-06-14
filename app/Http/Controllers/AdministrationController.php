@@ -40,8 +40,8 @@ class AdministrationController extends Controller
 
     public function statusAdd(Request $request)
     {
-        $statusName = $request->input('statusname');
-        if (isset($statusName) && len($statusName) > 0) {
+        $statusName = $request->input('name');
+        if (isset($statusName) && strlen($statusName) > 0) {
             $status = new Status();
             $status->name = $statusName;
             $status->save();
@@ -52,8 +52,8 @@ class AdministrationController extends Controller
 
     public function categoryAdd(Request $request)
     {
-        $categoryName = $request->input('categoryname');
-        if (isset($categoryName) && len($categoryName) > 0) {
+        $categoryName = $request->input('name');
+        if (isset($categoryName) && strlen($categoryName) > 0) {
             $categorty = new Category();
             $categorty->name = $categoryName;
             $categorty->save();
@@ -71,6 +71,24 @@ class AdministrationController extends Controller
     public function categoryDelete($id)
     {
         Category::findOrFail($id)->delete();
+        return Redirect::back();
+    }
+
+    public function statusUpdate(Request $request)
+    {
+        $status = Status::findOrFail($request->input('id'));
+        $status->name = $request->input('name');
+        $status->save();
+
+        return Redirect::back();
+    }
+
+    public function categoryUpdate(Request $request)
+    {
+        $category = Category::findOrFail($request->input('id'));
+        $category->name = $request->input('name');
+        $category->save();
+
         return Redirect::back();
     }
 

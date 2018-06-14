@@ -93,5 +93,37 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+    $('#iud-modal').on('show.bs.modal', function (event) {
+        var element = $(event.relatedTarget);
+        var id = element.data('id');
+        var name = element.data('name');
+        var url = element.data('url');
+        var modal = $(this);
+
+        modal.find('#iud-modal-form-id').val(id);
+        modal.find('#iud-modal-form-name-edit').val(name);
+        document.getElementById("iud-modal-form-add").action = '/administration/' + url + '/add'
+        document.getElementById("iud-modal-form-edit").action = '/administration/' + url + '/edit/' + id;
+        document.getElementById("iud-modal-form-delete").action = '/administration/' + url + '/delete/' + id;
+
+        if (id > 0) {
+            document.getElementById("iud-modal-button-add").style.display = "none";
+            document.getElementById("iud-modal-form-name-add").style.display = "none";
+
+            document.getElementById("iud-modal-button-edit").style.display = 'inline-block';
+            document.getElementById("iud-modal-button-delete").style.display = 'inline-block';
+            document.getElementById("iud-modal-form-name-edit").style.display = 'block';
+        } else {
+            document.getElementById("iud-modal-button-edit").style.display = "none";
+            document.getElementById("iud-modal-button-delete").style.display = "none";
+            document.getElementById("iud-modal-form-name-edit").style.display = "none";
+
+            document.getElementById("iud-modal-button-add").style.display = 'inline-block';
+            document.getElementById("iud-modal-form-name-add").style.display = 'block';
+        }
+
+    })
+</script>
 </body>
 </html>
