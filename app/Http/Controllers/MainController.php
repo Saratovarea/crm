@@ -58,9 +58,33 @@ class MainController extends Controller
             ->leftJoin('users as u2', 'tasks.executor_id', '=', 'u2.id')
             ->leftJoin('categories', 'tasks.category_id', '=', 'categories.id')
             ->leftJoin('statuses', 'tasks.status_id', '=', 'statuses.id')
-            ->select('tasks.*', 'u1.name as creatorname', 'u2.name as executorname', 'categories.name as categoryname', 'statuses.name as statusname')
+            ->select('tasks.*', 'u1.name as creatorname', 'u2.name as executorname', 'categories.name as categoryname', 'statuses.name as statusname',
+                DB::raw("0 as time"))
             ->whereRaw($filter)
             ->paginate(25);
+
+        foreach ($tasks as $task) {
+            $startDate = DB::table('task_times')->select('created_at')
+                ->where('task_id', $task->id)->orderBy('created_at', 'desc')->first()->created_at;
+            $endDate = DB::table('task_times')->select('created_at')
+                ->where('task_id', $task->id)->orderBy('created_at', 'asc')->first()->created_at;
+
+            $date1 = date_create($startDate);
+            $date2 = date_create($endDate);
+            $diff = date_diff($date1, $date2);
+            $time = '';
+            if ($diff->format('%d') != '0') {
+                $time .= $diff->format('%d д ');
+            }
+            if ($diff->format('%h') != '0') {
+                $time .= $diff->format('%h ч ');
+            }
+            if ($diff->format('%i') != '0') {
+                $time .= $diff->format('%i м ');
+            }
+
+            $task->time = $time;
+        }
 
         $creators = User::get();
         $executors = User::get();

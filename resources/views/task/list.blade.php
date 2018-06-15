@@ -25,7 +25,7 @@
             <td>{{ $task->descr }}</td>
             <td>{{ $task->created_at }}</td>
             <td>{{ $task->updated_at }}</td>
-            <td></td>
+            <td>{{ $task->time }}</td>
         </tr>
     @endforeach
     </tbody>

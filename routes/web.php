@@ -25,7 +25,7 @@ Route::get('/task/{id}', 'TaskController@view')->name('task');
 Route::post('/task/iud', 'TaskController@iud')->name('task/iud');
 
 /** ADMINISTRATION **/
-Route::get('/administration', 'AdministrationController@view')->name('administration');
+Route::get('/administration', 'AdministrationController@view')->name('administration/common');
 Route::get('/administration/statuses', 'AdministrationController@statuses')->name('administration/statuses');
 Route::post('/administration/statuses/add', 'AdministrationController@statusAdd')->name('administration/statuses/add');
 Route::post('/administration/statuses/edit/{id}', 'AdministrationController@statusUpdate')->name('administration/statuses/edit');

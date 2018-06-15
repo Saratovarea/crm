@@ -14,6 +14,9 @@
                             <div class="col-md-1">
                                 <ul>
                                     <li>
+                                        <a href="{{route('administration/common')}}"> Общее </a>
+                                    </li>
+                                    <li>
                                         <a href="{{route('administration/statuses')}}"> Статусы </a>
                                     </li>
                                     <li>

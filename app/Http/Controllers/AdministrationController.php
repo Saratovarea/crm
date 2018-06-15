@@ -21,7 +21,7 @@ class AdministrationController extends Controller
 
     public function view()
     {
-        return view('administration/main');
+        return view('administration/common');
     }
 
     public function categories()

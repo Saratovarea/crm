@@ -60,7 +60,7 @@
 
                                 @role('admin')
                                 <li>
-                                    <a href="{{ route('administration') }}">Администрование</a>
+                                    <a href="{{ route('administration/common') }}">Администрование</a>
                                 </li>
                                 @endrole
 
