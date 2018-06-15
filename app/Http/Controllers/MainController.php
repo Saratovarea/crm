@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use DateInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -51,6 +52,13 @@ class MainController extends Controller
             $filter = 'tasks.executor_id = ' . $executor_checked . ' AND ';
         }
 
+        if ($date_create) {
+            $filter = '\'' . date_create($date_create)->format('Y-m-d 00:00:00')
+                . '\' <= tasks.created_at AND tasks.created_at <= \''
+                . date_create($date_create)->add(new DateInterval('P1D'))->format('Y-m-d 00:00:00')
+                . '\' AND ';
+        }
+
         $filter .= '1 = 1';
 
         $tasks = DB::table('tasks')
@@ -58,7 +66,8 @@ class MainController extends Controller
             ->leftJoin('users as u2', 'tasks.executor_id', '=', 'u2.id')
             ->leftJoin('categories', 'tasks.category_id', '=', 'categories.id')
             ->leftJoin('statuses', 'tasks.status_id', '=', 'statuses.id')
-            ->select('tasks.*', 'u1.name as creatorname', 'u2.name as executorname', 'categories.name as categoryname', 'statuses.name as statusname',
+            ->select('tasks.*', 'u1.name as creatorname', 'u2.name as executorname',
+                'categories.name as categoryname', 'statuses.name as statusname',
                 DB::raw("0 as time"))
             ->whereRaw($filter)
             ->paginate(25);

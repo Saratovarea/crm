@@ -10,7 +10,10 @@
     <title>CRM IPRMEDIA - @yield('title')</title>
 
     <!-- Styles -->
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div id="app">
@@ -93,6 +96,8 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datepicker.ru.min.js') }}"></script>
 <script>
     $('#iud-modal').on('show.bs.modal', function (event) {
         var element = $(event.relatedTarget);
@@ -125,5 +130,16 @@
 
     })
 </script>
+
+<script>
+    $('#date-create input').datepicker({
+        format: "dd.mm.yyyy",
+        weekStart: 1,
+        language: "ru",
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
+
 </body>
 </html>

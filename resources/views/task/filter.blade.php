@@ -1,5 +1,5 @@
 <div>
-    <form class="form-horizontal" method="GET" action="{{route('home')}}">
+    <form class="form-inline" method="GET" action="{{route('home')}}">
 
         {{-- CATEGORY --}}
         <select id="category" class="form-control" name="category">
@@ -38,11 +38,18 @@
         </select>
 
         {{-- DATE CREATE --}}
-        {{--<input id="date_create" type="text" class="form-control">--}}
+        <div id="date-create" class="form-group">
+            <input type="text" class="form-control" name="date_create" value="{{$date_create}}" placeholder="Дата создания">
+        </div>
 
-        {{-- BUTTON --}}
+        {{-- BUTTON FILTER --}}
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Применить</button>
+        </div>
+
+         {{-- BUTTON CLEAR --}}
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" onclick="location.href = '/';">Очистить форму</button>
         </div>
 
         {{ csrf_field() }}
