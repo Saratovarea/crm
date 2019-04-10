@@ -34,3 +34,12 @@ Route::get('/administration/categories', 'AdministrationController@categories')-
 Route::post('/administration/categories/add', 'AdministrationController@categoryAdd')->name('administration/categories/add');
 Route::post('/administration/categories/edit/{id}', 'AdministrationController@categoryUpdate')->name('administration/categories/edit');
 Route::post('/administration/categories/delete/{id}', 'AdministrationController@categoryDelete')->name('administration/categories/delete');
+Route::get('/administration/users', 'AdministrationController@users')->name('administration/users');
+Route::get('/administration/accessLevelUsers', 'AdministrationController@accessLevelUsers')->name('administration/accessLevelUsers');
+Route::post('/administration/users/createгuserrole', 'AdministrationController@createUserRole')->name('createUserRole');
+
+
+
+
+
+Route::get('/test', 'Test@testing');

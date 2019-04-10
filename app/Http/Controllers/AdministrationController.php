@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Status;
+use App\Models\UserRole;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -91,5 +94,49 @@ class AdministrationController extends Controller
 
         return Redirect::back();
     }
+
+    public function users()
+    {
+        return view('administration/users');
+    }
+
+    public function accessLevelUsers()
+    {
+        $users = User::get();
+        $roles = Role::get();
+        return view('administration/accessLevelUsers', [
+            'users' => $users,
+            'roles' => $roles,
+        ]);
+    }
+
+//    public function createUserRole(Request $request)
+//    {
+//        $user = $request->input('user');
+//        $role = $request->input('role');
+//        $userRole = UserRole::whereRaw('user_id = ' . $user . ' and role_id = ' . $role)->first();
+//        $userRole = ($userRole != null) ?: $userRole->delete();
+//        $userRole = ($userRole == null) ?:  new UserRole() ;
+//        $userRole->user_id = $user;
+//        $userRole->role_id = $role;
+//        $userRole->save();
+//
+//
+//        return Redirect::back();
+//    }
+
+    public function createUserRole(Request $request)
+    {
+        $user = $request->input('user');
+        $role = $request->input('role');
+        $userRole = UserRole::whereRaw('user_id = ' . $user . ' and role_id = ' . $role)->first();
+        $userRole = ($userRole == null) ? new UserRole() : $userRole;
+        $userRole->user_id = $user;
+        $userRole->role_id = $role;
+        $userRole->save();
+
+        return Redirect::back();
+    }
+
 
 }

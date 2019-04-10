@@ -22,6 +22,12 @@
                                     <li>
                                         <a href="{{route('administration/categories')}}"> Категории </a>
                                     </li>
+                                    <li>
+                                        <a href="{{route('administration/users')}}"> Регистрация пользователей </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('administration/accessLevelUsers')}}"> Роли </a>
+                                    </li>
                                 </ul>
                             </div>
 

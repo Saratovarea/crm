@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email', 250)->unique();
             $table->string('password');
             $table->integer('floor')->nullable();
             $table->string('office')->nullable();
@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
 
         $user = new \App\User();
         $user->name = 'Ilya';
-        $user->email = 'asd@asd.com';
+        $user->email = 'saratovarea@gmail.com';
         $user->password = bcrypt('123456');
         $user->save();
 
